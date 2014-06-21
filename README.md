@@ -1,7 +1,9 @@
 tutum-docker-mysql
 ==================
 
-Base docker image to run a MySQL database server
+Base docker image to run a MySQL database server.
+
+This is a fork of [`tutum-docker-mysql`](https://github.com/tutumcloud/tutum-docker-mysql)
 
 Usage
 -----
