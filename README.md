@@ -3,15 +3,6 @@ tutum-docker-mysql
 
 Base docker image to run a MySQL database server
 
-
-MySQL version
--------------
-
-`master` branch maintains MySQL from Ubuntu trusty official source. If you want to get different version of MySQL, please checkout `5.5` branch and `5.6` branch.
-
-If you want to use MariaDB, please check our `tutum/mariadb` image: https://github.com/tutumcloud/tutum-docker-mariadb
-
-
 Usage
 -----
 
@@ -67,34 +58,9 @@ You can now test your deployment:
 Mounting the database file volume
 ---------------------------------
 
-In order to persist the database data, you can mount a local folder from the host 
-on the container to store the database files. To do so:
-
-	docker run -d -v /path/in/host:/var/lib/mysql tutum/mysql /bin/bash -c "/usr/bin/mysql_install_db"
-
-This will mount the local folder `/path/in/host` inside the docker in `/var/lib/mysql` (where MySQL will store the database files by default). `mysql_install_db` creates the initial database structure.
-
-Remember that this will mean that your host must have `/path/in/host` available when you run your docker image!
-
 After this you can start your mysql image but this time using `/path/in/host` as the database folder:
 
 	docker run -d -p 3306:3306 -v /path/in/host:/var/lib/mysql tutum/mysql
-
-
-Mounting the database file volume from other containers
-------------------------------------------------------
-
-Another way to persist the database data is to store database files in another container.
-To do so, first create a container that holds database files:
-
-    docker run -d -v /var/lib/mysql --name db_vol -p 22:22 tutum/ubuntu-trusty 
-
-This will create a new ssh-enabled container and use its folder `/var/lib/mysql` to store MySQL database files. 
-You can specify any name of the container by using `--name` option, which will be used in next step.
-
-After this you can start your MySQL image using volumes in the container created above (put the name of container in `--volumes-from`)
-
-    docker run -d --volumes-from db_vol -p 3306:3306 tutum/mysql 
 
 
 Migrating an existing MySQL Server

@@ -2,6 +2,8 @@
 
 VOLUME_HOME="/var/lib/mysql"
 
+# TODO: add a way to change the MySQL admin password.
+
 if [[ ! -d $VOLUME_HOME/mysql ]]; then
     echo "=> An empty or uninitialized MySQL volume is detected in $VOLUME_HOME"
     echo "=> Installing MySQL ..."
