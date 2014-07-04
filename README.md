@@ -8,13 +8,13 @@ This is a fork of [`tutum-docker-mysql`](https://github.com/tutumcloud/tutum-doc
 Usage
 -----
 
-To create the image `tutum/mysql`, execute the following command on the tutum-mysql folder:
+To create the image `westhouse/mysql`, execute the following command on the docker-mysql folder:
 
-	docker build -t tutum/mysql .
+	docker build -t westhouse/mysql .
 
 To run the image and bind to port 3306:
 
-	docker run -d -p 3306:3306 tutum/mysql
+	docker run -d -p 3306:3306 westhouse/mysql
 
 The first time that you run your container, a new user `admin` with all privileges 
 will be created in MySQL with a random password. To get the password, check the logs
@@ -50,7 +50,7 @@ Setting a specific password for the admin account
 If you want to use a preset password instead of a random generated one, you can
 set the environment variable `MYSQL_PASS` to your specific password when running the container:
 
-	docker run -d -p 3306:3306 -e MYSQL_PASS="mypass" tutum/mysql
+	docker run -d -p 3306:3306 -e MYSQL_PASS="mypass" westhouse/mysql
 
 You can now test your deployment:
 
@@ -62,7 +62,7 @@ Mounting the database file volume
 
 After this you can start your mysql image but this time using `/path/in/host` as the database folder:
 
-	docker run -d -p 3306:3306 -v /path/in/host:/var/lib/mysql tutum/mysql
+	docker run -d -p 3306:3306 -v /path/in/host:/var/lib/mysql westhouse/mysql
 
 
 Migrating an existing MySQL Server
@@ -80,7 +80,7 @@ To dump your database data:
 
 To import a SQL backup which is stored for example in the folder `/tmp` in the host, run the following:
 
-	sudo docker run -d -v /tmp:/tmp tutum/mysql /bin/bash -c "/import_sql.sh <rootpassword> /tmp/<dump.sql>")
+	sudo docker run -d -v /tmp:/tmp westhouse/mysql /bin/bash -c "/import_sql.sh <rootpassword> /tmp/<dump.sql>")
 
 Where `<rootpassword>` is the root password set earlier and `<dump.sql>` is the name of the SQL file to be imported.
 
